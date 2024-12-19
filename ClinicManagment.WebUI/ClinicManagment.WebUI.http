@@ -1,0 +1,6 @@
+@ClinicManagment.WebUI_HostAddress = http://localhost:5024
+
+GET {{ClinicManagment.WebUI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

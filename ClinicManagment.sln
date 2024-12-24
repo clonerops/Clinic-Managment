@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35004.147
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D869FC2A-CBD4-4542-9E17-1B4148B810C7}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ClinicManagment", "ClinicManagment", "{D869FC2A-CBD4-4542-9E17-1B4148B810C7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CM.Domain", "CM.Domain", "{2FB86AED-BF15-4AAC-9EF7-9A6B5D9708B8}"
 EndProject
@@ -11,19 +11,37 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CM.Application", "CM.Applic
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CM.Infrastructure", "CM.Infrastructure", "{6C6E683E-41BB-409E-88C0-B9FCEDAB494B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicManagment.Domain", "ClinicManagment.Domain\ClinicManagment.Domain.csproj", "{777DE27D-D713-4873-A2ED-50A046FBABD7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClinicManagment.Domain", "ClinicManagment.Domain\ClinicManagment.Domain.csproj", "{777DE27D-D713-4873-A2ED-50A046FBABD7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "0_Framework", "0_Framework\0_Framework.csproj", "{888B9D3C-018E-46B4-871C-2E252EC385F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "0_Framework", "0_Framework\0_Framework.csproj", "{888B9D3C-018E-46B4-871C-2E252EC385F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicManagment.Application.contract", "ClinicManagment.Application.contract\ClinicManagment.Application.contract.csproj", "{843777F3-A508-418A-9E14-24791329FADF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClinicManagment.Application.contract", "ClinicManagment.Application.contract\ClinicManagment.Application.contract.csproj", "{843777F3-A508-418A-9E14-24791329FADF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicManagment.Application", "ClinicManagment.Application\ClinicManagment.Application.csproj", "{708221A6-0125-4DBE-9422-9352B23430D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClinicManagment.Application", "ClinicManagment.Application\ClinicManagment.Application.csproj", "{708221A6-0125-4DBE-9422-9352B23430D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicManagment.Infrastructure.Configuration", "ClinicManagment.Infrastructure.Configuration\ClinicManagment.Infrastructure.Configuration.csproj", "{16257044-3053-42B5-8CD4-D32FFEAD5AA0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClinicManagment.Infrastructure.Configuration", "ClinicManagment.Infrastructure.Configuration\ClinicManagment.Infrastructure.Configuration.csproj", "{16257044-3053-42B5-8CD4-D32FFEAD5AA0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicManagment.Infrastructure.EfCore", "ClinicManagment.Infrastructure.EfCore\ClinicManagment.Infrastructure.EfCore.csproj", "{A5C6F182-9B3F-4D22-B5F2-CB92EEC02E2A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClinicManagment.Infrastructure.EfCore", "ClinicManagment.Infrastructure.EfCore\ClinicManagment.Infrastructure.EfCore.csproj", "{A5C6F182-9B3F-4D22-B5F2-CB92EEC02E2A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicManagment.WebUI", "ClinicManagment.WebUI\ClinicManagment.WebUI.csproj", "{4746618B-A7B7-48B9-80D5-1CE7AAAA9C0C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClinicManagment.WebUI", "ClinicManagment.WebUI\ClinicManagment.WebUI.csproj", "{4746618B-A7B7-48B9-80D5-1CE7AAAA9C0C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AccountManagment", "AccountManagment", "{ACC0E626-E8A0-45A6-9864-8DEB9BAE0AAD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AM.Domain", "AM.Domain", "{9B3D79C2-DFE2-4F8A-804C-A4781629417D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountManagment.Domain", "AccountManagment.Domain\AccountManagment.Domain.csproj", "{7141A5A7-3BC1-4F62-8ADB-2935472B2967}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AM.Application", "AM.Application", "{A58C9507-F4C6-4C9E-AA81-79291D65C9F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountManagment.Application.contract", "AccountManagment.Application.contract\AccountManagment.Application.contract.csproj", "{17E91C0F-9666-4AA9-829B-3E53CBD10ED6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountManagment.Application", "AccountManagment.Application\AccountManagment.Application.csproj", "{0E630459-C504-4A25-9EC2-98F786B22677}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AM.Infrastructure", "AM.Infrastructure", "{72D311E5-4A07-4CD5-9B7F-5B0DEFE28074}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountManagment.Infrastructure.EfCore", "AccountManagment.Infrastructure.EfCore\AccountManagment.Infrastructure.EfCore.csproj", "{373DB35D-E98E-4292-BB65-F72BA9235C0C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountManagment.Infrastructure.Configuration", "AccountManagment.Infrastructure.Configuration\AccountManagment.Infrastructure.Configuration.csproj", "{5ADDEC47-0ACA-4A3D-9A7F-87B47C746AD1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +77,26 @@ Global
 		{4746618B-A7B7-48B9-80D5-1CE7AAAA9C0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4746618B-A7B7-48B9-80D5-1CE7AAAA9C0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4746618B-A7B7-48B9-80D5-1CE7AAAA9C0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7141A5A7-3BC1-4F62-8ADB-2935472B2967}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7141A5A7-3BC1-4F62-8ADB-2935472B2967}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7141A5A7-3BC1-4F62-8ADB-2935472B2967}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7141A5A7-3BC1-4F62-8ADB-2935472B2967}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17E91C0F-9666-4AA9-829B-3E53CBD10ED6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17E91C0F-9666-4AA9-829B-3E53CBD10ED6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17E91C0F-9666-4AA9-829B-3E53CBD10ED6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17E91C0F-9666-4AA9-829B-3E53CBD10ED6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E630459-C504-4A25-9EC2-98F786B22677}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E630459-C504-4A25-9EC2-98F786B22677}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E630459-C504-4A25-9EC2-98F786B22677}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E630459-C504-4A25-9EC2-98F786B22677}.Release|Any CPU.Build.0 = Release|Any CPU
+		{373DB35D-E98E-4292-BB65-F72BA9235C0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{373DB35D-E98E-4292-BB65-F72BA9235C0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{373DB35D-E98E-4292-BB65-F72BA9235C0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{373DB35D-E98E-4292-BB65-F72BA9235C0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5ADDEC47-0ACA-4A3D-9A7F-87B47C746AD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5ADDEC47-0ACA-4A3D-9A7F-87B47C746AD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5ADDEC47-0ACA-4A3D-9A7F-87B47C746AD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5ADDEC47-0ACA-4A3D-9A7F-87B47C746AD1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -72,6 +110,14 @@ Global
 		{708221A6-0125-4DBE-9422-9352B23430D5} = {BD3AD608-3EF0-4097-B888-B425E31ABAFD}
 		{16257044-3053-42B5-8CD4-D32FFEAD5AA0} = {6C6E683E-41BB-409E-88C0-B9FCEDAB494B}
 		{A5C6F182-9B3F-4D22-B5F2-CB92EEC02E2A} = {6C6E683E-41BB-409E-88C0-B9FCEDAB494B}
+		{9B3D79C2-DFE2-4F8A-804C-A4781629417D} = {ACC0E626-E8A0-45A6-9864-8DEB9BAE0AAD}
+		{7141A5A7-3BC1-4F62-8ADB-2935472B2967} = {9B3D79C2-DFE2-4F8A-804C-A4781629417D}
+		{A58C9507-F4C6-4C9E-AA81-79291D65C9F9} = {ACC0E626-E8A0-45A6-9864-8DEB9BAE0AAD}
+		{17E91C0F-9666-4AA9-829B-3E53CBD10ED6} = {A58C9507-F4C6-4C9E-AA81-79291D65C9F9}
+		{0E630459-C504-4A25-9EC2-98F786B22677} = {A58C9507-F4C6-4C9E-AA81-79291D65C9F9}
+		{72D311E5-4A07-4CD5-9B7F-5B0DEFE28074} = {ACC0E626-E8A0-45A6-9864-8DEB9BAE0AAD}
+		{373DB35D-E98E-4292-BB65-F72BA9235C0C} = {72D311E5-4A07-4CD5-9B7F-5B0DEFE28074}
+		{5ADDEC47-0ACA-4A3D-9A7F-87B47C746AD1} = {72D311E5-4A07-4CD5-9B7F-5B0DEFE28074}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {88AEFF47-D148-4338-8124-BEB22A2C79A3}

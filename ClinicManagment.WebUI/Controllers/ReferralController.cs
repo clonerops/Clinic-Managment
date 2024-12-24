@@ -1,6 +1,4 @@
-﻿using ClinicManagment.Application.contract;
-using ClinicManagment.Application.contract.Referral;
-using Microsoft.AspNetCore.Http;
+﻿using ClinicManagment.Application.contract.Referral;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ClinicManagment.WebUI.Controllers

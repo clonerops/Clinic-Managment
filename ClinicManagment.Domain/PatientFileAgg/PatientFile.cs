@@ -2,6 +2,7 @@
 using ClinicManagment.Domain.DoctorAgg;
 using ClinicManagment.Domain.DocumentAgg;
 using ClinicManagment.Domain.PatientAgg;
+using ClinicManagment.Domain.ReferralAgg;
 
 namespace ClinicManagment.Domain.PatientFileAgg
 {
@@ -16,6 +17,12 @@ namespace ClinicManagment.Domain.PatientFileAgg
         public Patient Patient { get; set; }
         public Document Document { get; set; }
         public Doctor Doctor { get; set; }
+        public List<Referral> Referrals { get; set; }
+
+        public PatientFile ()
+        {
+            Referrals = new List<Referral>();
+        }
 
         public PatientFile(long fileCode, int patientId, int documentId, int doctorId, string description)
         {

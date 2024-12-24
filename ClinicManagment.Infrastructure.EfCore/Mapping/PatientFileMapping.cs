@@ -28,7 +28,10 @@ namespace PatientManagment.Infrastructure.EfCore.Mapping
                 .WithMany(x => x.PatientFiles)
                 .HasForeignKey(x => x.DoctorId);
 
+            builder.HasMany(x => x.Referrals)
+                .WithOne(x => x.PatientFile)
+                .HasForeignKey(x => x.PatientFileId);
 
-        }
+        }   
     }
 }

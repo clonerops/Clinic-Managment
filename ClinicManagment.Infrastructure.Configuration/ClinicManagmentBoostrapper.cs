@@ -11,6 +11,8 @@ using ClinicManagment.Application.contract.Document;
 using ClinicManagment.Domain.DocumentAgg;
 using ClinicManagment.Application.contract.PatientFile;
 using ClinicManagment.Domain.PatientFileAgg;
+using ClinicManagment.Application.contract.Referral;
+using ClinicManagment.Domain.ReferralAgg;
 
 
 namespace ClinicManagment.Infrastructure.Configuration
@@ -30,6 +32,9 @@ namespace ClinicManagment.Infrastructure.Configuration
 
             services.AddTransient<IPatientFileApplication, PatientFileApplication>();
             services.AddTransient<IPatientFileRepository, PatientFileRepository>();
+
+            services.AddTransient<IReferralApplication, ReferralApplication>();
+            services.AddTransient<IReferralRepository, ReferralRepository>();
 
 
             services.AddDbContext<CMContext>(x => x.UseSqlServer(connectionString));

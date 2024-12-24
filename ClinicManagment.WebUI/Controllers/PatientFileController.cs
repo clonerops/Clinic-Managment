@@ -42,18 +42,18 @@ namespace ClinicManagment.WebUI.Controllers
             return new JsonResult(PatientFIle);
         }
 
-        [HttpDelete("{id:int}")]
-        public JsonResult DeleteAccount([FromRoute] int id)
+        [HttpDelete]
+        public JsonResult DeleteAccount(int patientId, int documentId,int doctorId)
         {
-            var account = _patientFileApplication.Remove(id);
+            var account = _patientFileApplication.Remove(patientId, documentId, doctorId);
 
             return new JsonResult(account);
         }
 
-        [HttpPut("Restore/{id:int}")]
-        public JsonResult RestoreAccount([FromRoute] int id)
+        [HttpPut("Restore")]
+        public JsonResult RestoreAccount(int patientId, int documentId, int doctorId)
         {
-            var account = _patientFileApplication.Restore(id);
+            var account = _patientFileApplication.Restore(patientId, documentId, doctorId);
 
             return new JsonResult(account);
         }

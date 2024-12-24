@@ -1,9 +1,9 @@
 ﻿using _0_Framework.Infrastructure;
-using ClinicManagment.Application.contract.Document;
 using ClinicManagment.Application.contract.PatientFile;
 using ClinicManagment.Domain.PatientFileAgg;
 using Microsoft.EntityFrameworkCore;
 using System.IO;
+using System.Linq.Expressions;
 
 namespace ClinicManagment.Infrastructure.EfCore.Repository
 {
@@ -31,7 +31,13 @@ namespace ClinicManagment.Infrastructure.EfCore.Repository
                 DocumentName = x.Document.Name,
                 DoctorId = x.Doctor.Id,
                 DoctorName = String.Concat(x.Doctor.FirstName + " " + x.Doctor.LastName),
-            }).FirstOrDefault(x => x.Id == id);
+                FileCode = x.FileCode,
+                }).FirstOrDefault(x => x.Id == id);
+        }
+
+        public PatientFileViewModel GetBy(Expression<Func<PatientFile, PatientFileViewModel>> expression)
+        {
+            throw new NotImplementedException();
         }
 
         public List<PatientFileViewModel> List()
@@ -49,8 +55,18 @@ namespace ClinicManagment.Infrastructure.EfCore.Repository
                     DocumentName = x.Document.Name,
                     DoctorId = x.Doctor.Id,
                     DoctorName = String.Concat(x.Doctor.FirstName + " " + x.Doctor.LastName),
-
+                    FileCode = x.FileCode,
                 }).ToList();
+        }
+
+        public List<PatientFile> ListPatientFile()
+        {
+            return _context.PatientFiles
+                .Include(x => x.Patient)
+                .Include(x => x.Document)
+                .Include(x => x.Doctor)
+                .ToList();
+
         }
 
         public List<PatientFileViewModel> Search(PatientFileSearchModel searchModel)
@@ -68,6 +84,7 @@ namespace ClinicManagment.Infrastructure.EfCore.Repository
                     DocumentName = x.Document.Name,
                     DoctorId = x.Doctor.Id,
                     DoctorName = String.Concat(x.Doctor.FirstName + " " + x.Doctor.LastName),
+                    FileCode = x.FileCode,
                 });
 
             if (searchModel.FileCode > 0)

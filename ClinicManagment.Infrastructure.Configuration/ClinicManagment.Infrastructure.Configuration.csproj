@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AccountManagment.Application\AccountManagment.Application.csproj" />
     <ProjectReference Include="..\ClinicManagment.Application.contract\ClinicManagment.Application.contract.csproj" />
     <ProjectReference Include="..\ClinicManagment.Application\ClinicManagment.Application.csproj" />
     <ProjectReference Include="..\ClinicManagment.Domain\ClinicManagment.Domain.csproj" />

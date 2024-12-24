@@ -23,12 +23,11 @@ namespace AccountManagment.Domain.AccountAgg
         }
 
         public void Edit(string firstName, string lastName, string userName,
-            string password, string mobile, string nationalCode)
+             string mobile, string nationalCode)
         {
             FirstName = firstName;
             LastName = lastName;
             UserName = userName;
-            Password = password;
             Mobile = mobile;
             NationalCode = nationalCode;
         }

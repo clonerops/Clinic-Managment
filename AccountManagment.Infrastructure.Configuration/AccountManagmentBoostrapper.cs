@@ -1,4 +1,5 @@
-﻿using AccountManagment.Application;
+﻿using _0_Framework.Application;
+using AccountManagment.Application;
 using AccountManagment.Application.contract.Account;
 using AccountManagment.Domain.AccountAgg;
 using AccountManagment.Infrastructure.EfCore;
@@ -10,10 +11,13 @@ namespace AccountManagment.Infrastructure.Configuration
 {
     public class AccountManagmentBoostrapper
     {
-        public void Configure(IServiceCollection services, string connectionString)
+        public static void Configure(IServiceCollection services, string connectionString)
         {
             services.AddTransient<IAccountRepository, AccountRepository>();
             services.AddTransient<IAccountApplication, AccountApplication>();
+            services.AddTransient<IPasswordHasher, PasswordHasher>();
+            services.AddTransient<ITokenServices, TokenService>();
+
 
             services.AddDbContext<AccountContext>(x => x.UseSqlServer(connectionString));
 

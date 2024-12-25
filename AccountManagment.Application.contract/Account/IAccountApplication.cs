@@ -10,6 +10,7 @@ namespace AccountManagment.Application.contract.Account
         OperationResult Restore(Guid id);
         List<AccountViewModel> List();
         List<AccountViewModel> Search(AccountSearchModel searchModel);
+        AuthResult Login(Login command);
 
     }
 }

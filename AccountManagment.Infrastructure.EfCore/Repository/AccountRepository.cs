@@ -8,9 +8,23 @@ namespace AccountManagment.Infrastructure.EfCore.Repository
     public class AccountRepository : RepositoryBase<Guid, Account>, IAccountRepository
     {
         private readonly AccountContext _context;
-        public AccountRepository(DbContext context) : base(context)
+        public AccountRepository(AccountContext context) : base(context)
         {
-            context = _context;
+            _context = context;
+        }
+
+        public AccountViewModel GetByUserName(string userName)
+        {
+            return _context.Accounts.Select(x => new AccountViewModel
+            {
+                FirstName = x.FirstName,
+                Id = x.Id,
+                LastName = x.LastName,
+                Mobile = x.Mobile,
+                NationalCode = x.NationalCode,
+                UserName = x.UserName,
+                Password = x.Password,
+            }).FirstOrDefault(x => x.UserName == userName);
         }
 
         public List<AccountViewModel> List()

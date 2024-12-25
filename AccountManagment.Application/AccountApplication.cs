@@ -94,5 +94,27 @@ namespace AccountManagment.Application
             return _accountRepository.Search(searchModel);
         }
 
+        public AuthResult Login(Login command)
+        {
+            var operation = new AuthResult();
+
+            var account = _accountRepository.GetByUserName(command.UserName);
+            if (account == null)
+                return operation.Failed("کاربر با این مشخصات وجود ندارد");
+
+            (bool Verified, bool NeedsUpgrade) result = _passwordHasher.Check(account.Password, command.Password);
+
+            if(!result.Verified)
+                return operation.Failed("کاربر با این مشخصات وجود ندارد");
+
+            var token = _tokenServices.GenerateToken(new AuthViewModel
+            {
+                UserName = command.UserName,
+            });
+
+            return operation.Succedded(token);
+        }
+
+
     }
 }

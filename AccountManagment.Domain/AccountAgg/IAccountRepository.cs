@@ -7,5 +7,6 @@ namespace AccountManagment.Domain.AccountAgg
     {
         List<AccountViewModel> List();
         List<AccountViewModel> Search(AccountSearchModel searchModel);
+        AccountViewModel GetByUserName(string userName);
     }
 }

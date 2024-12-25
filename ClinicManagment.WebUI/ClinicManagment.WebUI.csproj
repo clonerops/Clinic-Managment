@@ -7,14 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AccountManagment.Infrastructure.Configuration\AccountManagment.Infrastructure.Configuration.csproj" />
     <ProjectReference Include="..\ClinicManagment.Application.contract\ClinicManagment.Application.contract.csproj" />
     <ProjectReference Include="..\ClinicManagment.Infrastructure.Configuration\ClinicManagment.Infrastructure.Configuration.csproj" />
   </ItemGroup>

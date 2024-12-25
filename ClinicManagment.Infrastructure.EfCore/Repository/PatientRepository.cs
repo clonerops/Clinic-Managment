@@ -55,7 +55,7 @@ namespace ClinicManagment.Infrastructure.EfCore.Repository
                 Reagent = x.Reagent,
                 Id = x.Id,
                 Address = x.Address,
-            }).ToList();
+            }).OrderByDescending(x => x.Id).ToList();
         }
 
         public List<PatientViewModel> Search(PatientSearchModel searchModel)

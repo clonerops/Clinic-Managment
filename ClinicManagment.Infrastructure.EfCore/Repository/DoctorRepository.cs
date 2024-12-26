@@ -35,6 +35,7 @@ namespace ClinicManagment.Infrastructure.EfCore.Repository
                 NationalCode = x.NationalCode,
                 Mobile = x.Mobile,
                 Description = x.Description,
+                Id = x.Id
             }).ToList();
         }
 

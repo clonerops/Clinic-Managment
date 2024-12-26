@@ -21,7 +21,7 @@ namespace ClinicManagment.Application
                 return operation.Failed("اطلاعات پزشک قبلا در سامانه ثبت شده است.");
 
             var doctor =  new Doctor(command.FirstName, command.LastName, 
-                command.NationalCode, command.Description, command.Mobile);
+                command.NationalCode, command.Mobile, command.Description);
 
             _doctorRepository.Create(doctor);
             _doctorRepository.SaveChanges();
@@ -40,7 +40,7 @@ namespace ClinicManagment.Application
                 return operation.Failed("اطلاعات پزشک در سامانه یافت نشد");
 
             doctor.Edit(command.FirstName, command.LastName,
-                command.NationalCode, command.Description, command.Mobile);
+                command.NationalCode, command.Mobile, command.Description);
 
             _doctorRepository.SaveChanges();
             return operation.Succedded();

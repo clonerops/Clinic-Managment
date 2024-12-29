@@ -29,12 +29,17 @@ namespace ClinicManagment.WebUI.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetAllReferrals()
+        public JsonResult GetAllReferrals([FromQuery] ReferralSearchModel searchModel)
         {
-            var Referral = _ReferralApplication.List();
+            var Referral = _ReferralApplication.Search(searchModel);
             return new JsonResult(Referral);
         }
-
+        [HttpGet("{id:long}")]
+        public JsonResult GetReferralById(long id)
+        {
+            var Referral = _ReferralApplication.GetBy(id);
+            return new JsonResult(Referral);
+        }
 
         [HttpDelete("{id:long}")]
         public JsonResult DeleteAccount([FromRoute] long id)

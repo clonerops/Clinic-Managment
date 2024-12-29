@@ -6,5 +6,7 @@ namespace ClinicManagment.Domain.ReferralAgg
     public interface IReferralRepository : IRepository<long, Referral>
     {
         List<ReferralViewModel> List();
+        List<ReferralViewModel> Search(ReferralSearchModel searchModel);
+        ReferralViewModel GetBy(long id);
     }
 }

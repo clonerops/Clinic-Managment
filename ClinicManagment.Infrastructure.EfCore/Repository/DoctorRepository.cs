@@ -51,13 +51,13 @@ namespace ClinicManagment.Infrastructure.EfCore.Repository
             });
 
             if (!string.IsNullOrWhiteSpace(searchModel.FirstName))
-                 query.Where(x => x.FirstName == searchModel.FirstName);
+                query = query.Where(x => x.FirstName == searchModel.FirstName);
             if (!string.IsNullOrWhiteSpace(searchModel.LastName))
-                 query.Where(x => x.LastName == searchModel.LastName);
+                query = query.Where(x => x.LastName == searchModel.LastName);
             if (!string.IsNullOrWhiteSpace(searchModel.Mobile))
-                 query.Where(x => x.Mobile == searchModel.Mobile);
+                query = query.Where(x => x.Mobile == searchModel.Mobile);
             if (!string.IsNullOrWhiteSpace(searchModel.NationalCode))
-                 query.Where(x => x.NationalCode == searchModel.NationalCode);
+                query = query.Where(x => x.NationalCode == searchModel.NationalCode);
 
             return query.ToList();
         }

@@ -6,9 +6,11 @@ namespace ClinicManagment.Application.contract.Referral
     {
         OperationResult Create(CreateReferral command);
         OperationResult Edit(EditReferral command);
+        ReferralViewModel GetBy(long id);
         OperationResult Remove(long id);
         OperationResult Restore(long id);
         List<ReferralViewModel> List();
+        List<ReferralViewModel> Search(ReferralSearchModel searchModel);
 
 
     }

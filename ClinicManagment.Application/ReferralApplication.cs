@@ -44,6 +44,11 @@ namespace ClinicManagment.Application
 
         }
 
+        public ReferralViewModel GetBy(long id)
+        {
+            return _referralRepository.GetBy(id);
+        }
+
         public List<ReferralViewModel> List()
         {
             return _referralRepository.List();
@@ -77,6 +82,11 @@ namespace ClinicManagment.Application
             _referralRepository.SaveChanges();
 
             return operation.Succedded();
+        }
+
+        public List<ReferralViewModel> Search(ReferralSearchModel searchModel)
+        {
+            return _referralRepository.Search(searchModel);
         }
     }
 }

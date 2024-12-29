@@ -29,9 +29,9 @@ namespace ClinicManagment.WebApi.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetAllDoctors()
+        public JsonResult GetAllDoctors([FromQuery] DoctorSearchModel searchModel)
         {
-            var Doctor = _DoctorApplication.List();
+            var Doctor = _DoctorApplication.Search(searchModel);
             return new JsonResult(Doctor);
         }
 

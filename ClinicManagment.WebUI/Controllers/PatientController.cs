@@ -30,9 +30,9 @@ namespace ManagmentClinic.WebApi.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetAllPatients()
+        public JsonResult GetAllPatients([FromQuery] PatientSearchModel searchModel)
         {
-            var patient = _patientApplication.Lists();
+            var patient = _patientApplication.Search(searchModel);
             return new JsonResult(patient);
         }
 

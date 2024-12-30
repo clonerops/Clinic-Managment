@@ -11,6 +11,8 @@ namespace ClinicManagment.Application.contract.PatientFile
         public string DocumentName { get; set; }
         public int DoctorId { get; set; }
         public string DoctorName { get; set; }
+        public DateTime CreationDateGr { get; set; }
+        public string CreationDate { get; set; }
     }
 
 }

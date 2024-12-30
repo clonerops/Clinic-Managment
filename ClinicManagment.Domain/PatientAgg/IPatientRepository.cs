@@ -8,6 +8,7 @@ namespace ClinicManagment.Domain.PatientAgg
         List<PatientViewModel> List();
         PatientViewModel GetBy(int id);
         List<PatientViewModel> Search(PatientSearchModel searchModel);
+        List<PatientViewModel> PatientReport(PatientReportSearchModel searchModel);
         
         
     }

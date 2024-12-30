@@ -44,19 +44,26 @@ namespace ManagmentClinic.WebApi.Controllers
         }
 
         [HttpDelete("{id:int}")]
-        public JsonResult DeleteAccount([FromRoute] int id)
+        public JsonResult DeletePatient([FromRoute] int id)
         {
-            var account = _patientApplication.Remove(id);
+            var patient = _patientApplication.Remove(id);
 
-            return new JsonResult(account);
+            return new JsonResult(patient);
         }
 
         [HttpPut("Restore/{id:int}")]
-        public JsonResult RestoreAccount([FromRoute] int id)
+        public JsonResult RestorePatient([FromRoute] int id)
         {
-            var account = _patientApplication.Restore(id);
+            var patient = _patientApplication.Restore(id);
 
-            return new JsonResult(account);
+            return new JsonResult(patient);
+        }
+        [HttpGet("PatientReportBasedOfFile")]
+        public JsonResult PatientReport([FromQuery] PatientReportSearchModel searchModel)
+        {
+            var patient = _patientApplication.PatientReport(searchModel);
+            return new JsonResult(patient);
+
         }
 
     }

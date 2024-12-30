@@ -12,5 +12,6 @@ namespace ClinicManagment.Application.contract.Patient
         OperationResult Restore(int id);
         List<PatientViewModel> Lists();
         List<PatientViewModel> Search(PatientSearchModel searchModel);
+        List<PatientViewModel> PatientReport(PatientReportSearchModel searchModel);
     }
 }

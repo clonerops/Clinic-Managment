@@ -89,5 +89,11 @@ namespace ClinicManagment.Application
         {
             return _patientRepository.Search(searchModel);
         }
+
+        public List<PatientViewModel> PatientReport(PatientReportSearchModel searchModel)
+        {
+            return _patientRepository.PatientReport(searchModel);
+        }
+
     }
 }

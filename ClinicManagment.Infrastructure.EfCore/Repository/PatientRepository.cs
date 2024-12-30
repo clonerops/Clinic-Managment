@@ -1,10 +1,13 @@
-﻿using _0_Framework.Infrastructure;
+﻿using _0_Framework.Application;
+using _0_Framework.Infrastructure;
 using ClinicManagment.Application.contract.Patient;
+using ClinicManagment.Application.contract.PatientFile;
 using ClinicManagment.Domain.PatientAgg;
+using Microsoft.EntityFrameworkCore;
 
 namespace ClinicManagment.Infrastructure.EfCore.Repository
 {
-    public class PatientRepository: RepositoryBase<int, Patient>, IPatientRepository
+    public class PatientRepository : RepositoryBase<int, Patient>, IPatientRepository
     {
         private readonly CMContext _context;
 
@@ -97,5 +100,60 @@ namespace ClinicManagment.Infrastructure.EfCore.Repository
             return query.ToList();
 
         }
+
+        public List<PatientViewModel> PatientReport(PatientReportSearchModel searchModel)
+        {
+            var query = _context.Patients.Include(x => x.PatientFiles).Where(x => x.IsDeleted == false).Select(x => new PatientViewModel
+            {
+                FirstName = x.FirstName,
+                LastName = x.LastName,
+                NationalCode = x.NationalCode,
+                Mobile = x.Mobile,
+                WhatsappNumber = x.WhatsappNumber,
+                HomeNumber = x.HomeNumber,
+                BirthDate = x.BirthDate,
+                Job = x.Job,
+                MaritalStatus = x.MaritalStatus,
+                Description = x.Description,
+                Education = x.Education,
+                Gender = x.Gender,
+                Reagent = x.Reagent,
+                Id = x.Id,
+                Address = x.Address,
+                PatientFiles = x.PatientFiles.Select(x => new PatientFileViewModel
+                {
+                    Id = x.Id,
+                    PatientId = x.PatientId,
+                    PatientName = x.Patient.FirstName + " " + x.Patient.LastName,
+                    FileCode = x.FileCode,  
+                    DocumentId = x.DocumentId,
+                    DoctorId = x.DoctorId,
+                    DoctorName = x.Doctor.FirstName +" " + x.Doctor.LastName,
+                    DocumentName = x.Document.Name,
+                    CreationDateGr = x.CreationDate,
+                    CreationDate = x.CreationDate.ToFarsi()
+                }).ToList(),
+            });
+
+            if (searchModel.DocumentId > 0)
+                query = query.Where(x => x.PatientFiles.Any(x => x.DocumentId == searchModel.DocumentId));
+
+            if (!string.IsNullOrWhiteSpace(searchModel.FromDate))
+            {
+                var fromDate = DateTime.Now;
+                query = query.Where(x => x.PatientFiles.Any(x => x.CreationDateGr > fromDate));
+            }
+
+            if (!string.IsNullOrWhiteSpace(searchModel.ToDate))
+            {
+                var toDate = DateTime.Now;
+                query = query.Where(x => x.PatientFiles.Any(x => x.CreationDateGr < toDate));
+            }
+
+            return query.ToList();
+
+        }
+
+
     }
 }

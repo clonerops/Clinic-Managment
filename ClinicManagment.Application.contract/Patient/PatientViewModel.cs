@@ -1,4 +1,6 @@
-﻿namespace ClinicManagment.Application.contract.Patient
+﻿using ClinicManagment.Application.contract.PatientFile;
+
+namespace ClinicManagment.Application.contract.Patient
 {
     public class PatientViewModel
     {
@@ -18,6 +20,7 @@
         public string Address { get; set; }
         public string Description { get; set; }
         public bool IsDeleted { get; set; }
+        public List<PatientFileViewModel> PatientFiles { get; set; }
     }
 }
 

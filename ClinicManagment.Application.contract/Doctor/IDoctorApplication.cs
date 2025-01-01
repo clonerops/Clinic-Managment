@@ -4,10 +4,10 @@ namespace ClinicManagment.Application.contract
 {
     public interface IDoctorApplication
     {
-        OperationResult Create(CreateDoctor command);
-        OperationResult Edit(EditDoctor command);
-        OperationResult Remove(int id);
-        OperationResult Restore(int id);
+        OperationResult<DoctorViewModel> Create(CreateDoctor command);
+        OperationResult<DoctorViewModel> Edit(EditDoctor command);
+        OperationResult<DoctorViewModel> Remove(int id);
+        OperationResult<DoctorViewModel> Restore(int id);
         DoctorViewModel GetBy(int id);
         List<DoctorViewModel> List();
         List<DoctorViewModel> Search(DoctorSearchModel searchModel);

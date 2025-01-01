@@ -5,13 +5,14 @@ namespace ClinicManagment.Application.contract.Patient
 {
     public interface IPatientApplication
     {
-        OperationResult Create(CreatePatient command);
-        OperationResult Edit(EditPatient command);
-        OperationResult Remove(int id);
+        OperationResult<PatientViewModel> Create(CreatePatient command);
+        OperationResult<PatientViewModel> Edit(EditPatient command);
+        OperationResult<PatientViewModel> Remove(int id);
         PatientViewModel GetBy(int id);
-        OperationResult Restore(int id);
+        OperationResult<PatientViewModel> Restore(int id);
         List<PatientViewModel> Lists();
         List<PatientViewModel> Search(PatientSearchModel searchModel);
         List<PatientViewModel> PatientReport(PatientReportSearchModel searchModel);
+        List<PatientViewModel> PatientReportBasedOfReferralCount(PatientReportBasedOfReferralCountSearchModel searchModel);
     }
 }

@@ -13,9 +13,9 @@ namespace ClinicManagment.Application
             _referralRepository = referralRepository;
         }
 
-        public OperationResult Create(CreateReferral command)
+        public OperationResult<ReferralViewModel> Create(CreateReferral command)
         {
-            var operation = new OperationResult();
+            var operation = new OperationResult<ReferralViewModel>();
 
             var referral = new Referral(command.ReferralDate, command.ReferralReason,
                 command.ReferralDescription, command.PatientFileId);
@@ -23,12 +23,17 @@ namespace ClinicManagment.Application
             _referralRepository.Create(referral);
             _referralRepository.SaveChanges();
 
-            return operation.Succedded();
+            var referralViewModel = new ReferralViewModel
+            {
+                Id = referral.Id,
+            };
+
+            return operation.Succedded(referralViewModel);
         }
 
-        public OperationResult Edit(EditReferral command)
+        public OperationResult<ReferralViewModel> Edit(EditReferral command)
         {
-            var operation = new OperationResult();
+            var operation = new OperationResult<ReferralViewModel>();
 
             var referral = _referralRepository.Get(command.Id);
 
@@ -40,7 +45,12 @@ namespace ClinicManagment.Application
 
             _referralRepository.SaveChanges();
 
-            return operation.Succedded();
+            var referralViewModel = new ReferralViewModel
+            {
+                Id = referral.Id,
+            };
+
+            return operation.Succedded(referralViewModel);
 
         }
 
@@ -54,9 +64,9 @@ namespace ClinicManagment.Application
             return _referralRepository.List();
         }
 
-        public OperationResult Remove(long id)
+        public OperationResult<ReferralViewModel> Remove(long id)
         {
-            var operation = new OperationResult();
+            var operation = new OperationResult<ReferralViewModel>();
 
             var referral = _referralRepository.Get(id);
 
@@ -66,12 +76,17 @@ namespace ClinicManagment.Application
             referral.Removed();
             _referralRepository.SaveChanges();
 
-            return operation.Succedded();
+            var referralViewModel = new ReferralViewModel
+            {
+                Id = referral.Id,
+            };
+
+            return operation.Succedded(referralViewModel);
         }
 
-        public OperationResult Restore(long id)
+        public OperationResult<ReferralViewModel> Restore(long id)
         {
-            var operation = new OperationResult();
+            var operation = new OperationResult<ReferralViewModel>();
 
             var referral = _referralRepository.Get(id);
 
@@ -81,7 +96,12 @@ namespace ClinicManagment.Application
             referral.Restore();
             _referralRepository.SaveChanges();
 
-            return operation.Succedded();
+            var referralViewModel = new ReferralViewModel
+            {
+                Id = referral.Id,
+            };
+
+            return operation.Succedded(referralViewModel);
         }
 
         public List<ReferralViewModel> Search(ReferralSearchModel searchModel)

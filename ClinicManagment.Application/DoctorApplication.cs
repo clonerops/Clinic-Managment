@@ -13,9 +13,9 @@ namespace ClinicManagment.Application
             _doctorRepository = doctorRepository;
         }
 
-        public OperationResult Create(CreateDoctor command)
+        public OperationResult<DoctorViewModel> Create(CreateDoctor command)
         {
-            var operation = new OperationResult();
+            var operation = new OperationResult<DoctorViewModel>();
 
             if (_doctorRepository.Exist(x => x.NationalCode == command.NationalCode))
                 return operation.Failed("اطلاعات پزشک قبلا در سامانه ثبت شده است.");
@@ -26,13 +26,18 @@ namespace ClinicManagment.Application
             _doctorRepository.Create(doctor);
             _doctorRepository.SaveChanges();
 
-            return operation.Succedded();
+            var doctorViewModel = new DoctorViewModel
+            {
+                Id = doctor.Id,
+            };
+
+            return operation.Succedded(doctorViewModel);
 
         }
 
-        public OperationResult Edit(EditDoctor command)
+        public OperationResult<DoctorViewModel> Edit(EditDoctor command)
         {
-            var operation = new OperationResult();
+            var operation = new OperationResult<DoctorViewModel>();
 
             var doctor = _doctorRepository.Get(command.Id);
 
@@ -43,7 +48,12 @@ namespace ClinicManagment.Application
                 command.NationalCode, command.Mobile, command.Description);
 
             _doctorRepository.SaveChanges();
-            return operation.Succedded();
+            var doctorViewModel = new DoctorViewModel
+            {
+                Id = doctor.Id,
+            };
+
+            return operation.Succedded(doctorViewModel);
 
         }
 
@@ -57,9 +67,9 @@ namespace ClinicManagment.Application
             return _doctorRepository.List();
         }
 
-        public OperationResult Remove(int id)
+        public OperationResult<DoctorViewModel> Remove(int id)
         {
-            var operation = new OperationResult();
+            var operation = new OperationResult<DoctorViewModel>();
 
             var doctor = _doctorRepository.Get(id);
 
@@ -68,13 +78,18 @@ namespace ClinicManagment.Application
 
             doctor.Removed();
             _doctorRepository.SaveChanges();
-            return operation.Succedded();
+            var doctorViewModel = new DoctorViewModel
+            {
+                Id = doctor.Id,
+            };
+
+            return operation.Succedded(doctorViewModel);
 
         }
 
-        public OperationResult Restore(int id)
+        public OperationResult<DoctorViewModel> Restore(int id)
         {
-            var operation = new OperationResult();
+            var operation = new OperationResult<DoctorViewModel>();
 
             var doctor = _doctorRepository.Get(id);
 
@@ -83,7 +98,12 @@ namespace ClinicManagment.Application
 
             doctor.Restore();
             _doctorRepository.SaveChanges();
-            return operation.Succedded();
+            var doctorViewModel = new DoctorViewModel
+            {
+                Id = doctor.Id,
+            };
+
+            return operation.Succedded(doctorViewModel);
         }
 
         public List<DoctorViewModel> Search(DoctorSearchModel searchModel)

@@ -19,9 +19,9 @@ namespace AccountManagment.Application
 
         }
 
-        public OperationResult Create(CreateAccount command)
+        public OperationResult<AccountViewModel> Create(CreateAccount command)
         {
-            var opeartion = new OperationResult();
+            var opeartion = new OperationResult<AccountViewModel>();
 
             if (_accountRepository.Exist(x => x.UserName == command.UserName))
                 return opeartion.Failed("کاربر بااین نام کاربری قبلا در سامانه ثبت شده است");
@@ -35,13 +35,18 @@ namespace AccountManagment.Application
 
             _accountRepository.SaveChanges();
 
-            return opeartion.Succedded();
+            var accountViewModel = new AccountViewModel
+            {
+                Id = account.Id,
+            };
+
+            return opeartion.Succedded(accountViewModel);
 
         }
 
-        public OperationResult Edit(EditAccount command)
+        public OperationResult<AccountViewModel> Edit(EditAccount command)
         {
-            var operation = new OperationResult();
+            var operation = new OperationResult<AccountViewModel>();
 
             var account = _accountRepository.Get(command.Id);
             if (account == null)
@@ -52,7 +57,12 @@ namespace AccountManagment.Application
               
             _accountRepository.SaveChanges();
 
-            return operation.Succedded();
+            var accountViewModel = new AccountViewModel
+            {
+                Id = account.Id,
+            };
+
+            return operation.Succedded(accountViewModel);
 
         }
 
@@ -61,9 +71,9 @@ namespace AccountManagment.Application
             return _accountRepository.List();
         }
 
-        public OperationResult Remove(Guid id)
+        public OperationResult<AccountViewModel> Remove(Guid id)
         {
-            var operation = new OperationResult();
+            var operation = new OperationResult<AccountViewModel>();
 
             var account = _accountRepository.Get(id);
             if (account == null)
@@ -72,12 +82,17 @@ namespace AccountManagment.Application
             account.Removed();
             _accountRepository.SaveChanges();
 
-            return operation.Succedded();
+            var accountViewModel = new AccountViewModel
+            {
+                Id = account.Id,
+            };
+
+            return operation.Succedded(accountViewModel);
         }
 
-        public OperationResult Restore(Guid id)
+        public OperationResult<AccountViewModel> Restore(Guid id)
         {
-            var operation = new OperationResult();
+            var operation = new OperationResult<AccountViewModel>();
 
             var account = _accountRepository.Get(id);
             if (account == null)
@@ -86,7 +101,12 @@ namespace AccountManagment.Application
             account.Restored();
             _accountRepository.SaveChanges();
 
-            return operation.Succedded();
+            var accountViewModel = new AccountViewModel
+            {
+                Id = account.Id,
+            };
+
+            return operation.Succedded(accountViewModel);
         }
 
         public List<AccountViewModel> Search(AccountSearchModel searchModel)

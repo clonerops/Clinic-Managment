@@ -4,10 +4,10 @@ namespace ClinicManagment.Application.contract.Document
 {
     public interface IDocumentApplication
     {
-        OperationResult Create(CreateDocument command);
-        OperationResult Edit(EditDocument command);
-        OperationResult Remove(int id);
-        OperationResult Restore(int id);
+        OperationResult<DocumentViewModel> Create(CreateDocument command);
+        OperationResult<DocumentViewModel> Edit(EditDocument command);
+        OperationResult<DocumentViewModel> Remove(int id);
+        OperationResult<DocumentViewModel> Restore(int id);
         DocumentViewModel GetBy(int id);
         List<DocumentViewModel> List();
         List<DocumentViewModel> Search(DocumentSearchModel searchModel);

@@ -65,6 +65,12 @@ namespace ManagmentClinic.WebApi.Controllers
             return new JsonResult(patient);
 
         }
+        [HttpGet("PatientReportBasedOfReferralCount")]
+        public JsonResult PatientReportBasedOfReferralCount([FromQuery] PatientReportBasedOfReferralCountSearchModel searchModel)
+        {
+            var patient = _patientApplication.PatientReportBasedOfReferralCount(searchModel);
+            return new JsonResult(patient);
 
+        }
     }
 }

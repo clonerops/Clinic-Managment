@@ -13,9 +13,9 @@ namespace ClinicManagment.Application
             _documentRepository = documentRepository;
         }
 
-        public OperationResult Create(CreateDocument command)
+        public OperationResult<DocumentViewModel> Create(CreateDocument command)
         {
-            var operation = new OperationResult();
+            var operation = new OperationResult<DocumentViewModel>();
 
             if (_documentRepository.Exist(x => x.Name == command.Name))
                 return operation.Failed("اطلاعات نوع پرونده قبلا در سامانه ایجاد شده است");
@@ -24,12 +24,17 @@ namespace ClinicManagment.Application
             _documentRepository.Create(document);
             _documentRepository.SaveChanges();
 
-            return operation.Succedded();
+            var documentViewModel = new DocumentViewModel
+            {
+                Id = document.Id,
+            };
+
+            return operation.Succedded(documentViewModel);
         }
 
-        public OperationResult Edit(EditDocument command)
+        public OperationResult<DocumentViewModel> Edit(EditDocument command)
         {
-            var operation = new OperationResult();
+            var operation = new OperationResult<DocumentViewModel>();
             
             var document = _documentRepository.Get(command.Id);
 
@@ -38,7 +43,12 @@ namespace ClinicManagment.Application
 
             document.Edit(command.Name, command.Description);
             _documentRepository.SaveChanges();
-            return operation.Succedded();
+            var documentViewModel = new DocumentViewModel
+            {
+                Id = document.Id,
+            };
+
+            return operation.Succedded(documentViewModel);
 
         }
 
@@ -52,9 +62,9 @@ namespace ClinicManagment.Application
             return _documentRepository.List();
         }
 
-        public OperationResult Remove(int id)
+        public OperationResult<DocumentViewModel> Remove(int id)
         {
-            var operation = new OperationResult();
+            var operation = new OperationResult<DocumentViewModel>();
 
             var document = _documentRepository.Get(id);
 
@@ -63,12 +73,17 @@ namespace ClinicManagment.Application
 
             document.Removed();
             _documentRepository.SaveChanges();
-            return operation.Succedded();
+            var documentViewModel = new DocumentViewModel
+            {
+                Id = document.Id,
+            };
+
+            return operation.Succedded(documentViewModel);
         }
 
-        public OperationResult Restore(int id)
+        public OperationResult<DocumentViewModel> Restore(int id)
         {
-            var operation = new OperationResult();
+            var operation = new OperationResult<DocumentViewModel>();
 
             var document = _documentRepository.Get(id);
 
@@ -77,7 +92,12 @@ namespace ClinicManagment.Application
 
             document.Restore();
             _documentRepository.SaveChanges();
-            return operation.Succedded();
+            var documentViewModel = new DocumentViewModel
+            {
+                Id = document.Id,
+            };
+
+            return operation.Succedded(documentViewModel);
         }
 
         public List<DocumentViewModel> Search(DocumentSearchModel searchModel)

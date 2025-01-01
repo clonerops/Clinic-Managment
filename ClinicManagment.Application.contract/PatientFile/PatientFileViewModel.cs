@@ -1,4 +1,6 @@
 ﻿
+using ClinicManagment.Application.contract.Referral;
+
 namespace ClinicManagment.Application.contract.PatientFile
 {
     public class PatientFileViewModel
@@ -13,6 +15,7 @@ namespace ClinicManagment.Application.contract.PatientFile
         public string DoctorName { get; set; }
         public DateTime CreationDateGr { get; set; }
         public string CreationDate { get; set; }
+        public List<ReferralViewModel> Referrals { get; set; }
     }
 
 }

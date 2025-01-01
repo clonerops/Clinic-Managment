@@ -14,9 +14,9 @@ namespace ClinicManagment.Application
             _patientRepository = patientRepository;
         }
 
-        public OperationResult Create(CreatePatient command)
+        public OperationResult<PatientViewModel> Create(CreatePatient command)
         {
-            var operation = new OperationResult();
+            var operation = new OperationResult<PatientViewModel>();
 
             if (_patientRepository.Exist(x => x.NationalCode == command.NationalCode))
                 return operation.Failed("اطلاعات کاربر قبلا در سامانه ذخیره شده است");
@@ -28,13 +28,21 @@ namespace ClinicManagment.Application
 
             _patientRepository.Create(patient);
             _patientRepository.SaveChanges();
-            return operation.Succedded();
+
+            var patientViewModel = new PatientViewModel
+            {
+                Id = patient.Id,
+                FirstName = patient.FirstName,
+                LastName = patient.LastName,
+            };
+
+            return operation.Succedded(patientViewModel);
 
         }
 
-        public OperationResult Edit(EditPatient command)
+        public OperationResult<PatientViewModel> Edit(EditPatient command)
         {
-            var operation = new OperationResult();
+            var operation = new OperationResult<PatientViewModel>();
 
             var patient = _patientRepository.Get(command.Id);
 
@@ -47,7 +55,14 @@ namespace ClinicManagment.Application
                 command.Address, command.Description);
 
             _patientRepository.SaveChanges();
-            return operation.Succedded();
+
+
+            var patientViewModel = new PatientViewModel
+            {
+                Id = patient.Id
+            };
+
+            return operation.Succedded(patientViewModel);
         }
 
         public PatientViewModel GetBy(int id)
@@ -60,21 +75,26 @@ namespace ClinicManagment.Application
             return _patientRepository.List();
         }
 
-        public OperationResult Remove(int id)
+        public OperationResult<PatientViewModel> Remove(int id)
         {
-            var operation = new OperationResult();
+            var operation = new OperationResult<PatientViewModel>();
             var patient = _patientRepository.Get(id);
             if(patient == null)
                 return operation.Failed("اطلاعات بیمار در سامانه یافت نشد.");
 
             patient.Removed();
             _patientRepository.SaveChanges();
-            return operation.Succedded();
+            var patientViewModel = new PatientViewModel
+            {
+                Id = patient.Id
+            };
+
+            return operation.Succedded(patientViewModel);
         }
 
-        public OperationResult Restore(int id)
+        public OperationResult<PatientViewModel> Restore(int id)
         {
-            var operation = new OperationResult();
+            var operation = new OperationResult<PatientViewModel>();
             var patient = _patientRepository.Get(id);
 
             if (patient == null)
@@ -82,7 +102,12 @@ namespace ClinicManagment.Application
 
             patient.Restore();
             _patientRepository.SaveChanges();
-            return operation.Succedded();
+            var patientViewModel = new PatientViewModel
+            {
+                Id = patient.Id
+            };
+
+            return operation.Succedded(patientViewModel);
         }
 
         public List<PatientViewModel> Search(PatientSearchModel searchModel)
@@ -95,5 +120,9 @@ namespace ClinicManagment.Application
             return _patientRepository.PatientReport(searchModel);
         }
 
+        public List<PatientViewModel> PatientReportBasedOfReferralCount(PatientReportBasedOfReferralCountSearchModel searchModel)
+        {
+            return _patientRepository.PatientReportBasedOfReferralCount(searchModel);            
+        }
     }
 }

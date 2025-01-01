@@ -13,9 +13,9 @@ namespace ClinicManagment.Application
             _patientFileRepository = patientFileRepository;
         }
 
-        public OperationResult Create(CreatePatientFile command)
+        public OperationResult<PatientFileViewModel> Create(CreatePatientFile command)
         {
-            var operation = new OperationResult();
+            var operation = new OperationResult<PatientFileViewModel>();
 
             if (_patientFileRepository.Exist(x =>
                                              (x.PatientId == command.PatientId) &&
@@ -37,12 +37,17 @@ namespace ClinicManagment.Application
             _patientFileRepository.Create(patientFile);
             _patientFileRepository.SaveChanges();
 
-            return operation.Succedded();
+            var patientFileViewModel = new PatientFileViewModel
+            {
+                Id = patientFile.Id,
+            };
+
+            return operation.Succedded(patientFileViewModel);
         }
 
-        public OperationResult Edit(EditPatientFile command)
+        public OperationResult<PatientFileViewModel> Edit(EditPatientFile command)
         {
-            var operation = new OperationResult();
+            var operation = new OperationResult<PatientFileViewModel>();
 
             var patientFile = _patientFileRepository
                 .ListPatientFile()
@@ -58,7 +63,12 @@ namespace ClinicManagment.Application
             patientFile.Edit(command.PatientId, command.DocumentId, command.DoctorId, command.Description);
             _patientFileRepository.SaveChanges();
 
-            return operation.Succedded();
+            var patientFileViewModel = new PatientFileViewModel
+            {
+                Id = patientFile.Id,
+            };
+
+            return operation.Succedded(patientFileViewModel);
 
         }
 
@@ -72,9 +82,9 @@ namespace ClinicManagment.Application
             return _patientFileRepository.List();
         }
 
-        public OperationResult Remove(int patientId, int documentId, int doctorId)
+        public OperationResult<PatientFileViewModel> Remove(int patientId, int documentId, int doctorId)
         {
-            var operation = new OperationResult();
+            var operation = new OperationResult<PatientFileViewModel>();
 
             var patientFile = _patientFileRepository
             .ListPatientFile()
@@ -89,12 +99,17 @@ namespace ClinicManagment.Application
 
             patientFile.Removed();
             _patientFileRepository .SaveChanges();
-            return operation.Succedded();
+            var patientFileViewModel = new PatientFileViewModel
+            {
+                Id = patientFile.Id,
+            };
+
+            return operation.Succedded(patientFileViewModel);
         }
 
-        public OperationResult Restore(int patientId, int documentId, int doctorId)
+        public OperationResult<PatientFileViewModel> Restore(int patientId, int documentId, int doctorId)
         {
-            var operation = new OperationResult();
+            var operation = new OperationResult<PatientFileViewModel>();
 
             var patientFile = _patientFileRepository
             .ListPatientFile()
@@ -110,7 +125,12 @@ namespace ClinicManagment.Application
             patientFile.Restore();
             _patientFileRepository.SaveChanges();
 
-            return operation.Succedded();
+            var patientFileViewModel = new PatientFileViewModel
+            {
+                Id = patientFile.Id,
+            };
+
+            return operation.Succedded(patientFileViewModel);
         }
 
         public List<PatientFileViewModel> Search(PatientFileSearchModel searchModel)

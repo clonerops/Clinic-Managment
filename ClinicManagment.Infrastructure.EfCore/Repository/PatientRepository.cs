@@ -2,6 +2,7 @@
 using _0_Framework.Infrastructure;
 using ClinicManagment.Application.contract.Patient;
 using ClinicManagment.Application.contract.PatientFile;
+using ClinicManagment.Application.contract.Referral;
 using ClinicManagment.Domain.PatientAgg;
 using Microsoft.EntityFrameworkCore;
 
@@ -154,6 +155,70 @@ namespace ClinicManagment.Infrastructure.EfCore.Repository
 
         }
 
+        public List<PatientViewModel> PatientReportBasedOfReferralCount(PatientReportBasedOfReferralCountSearchModel searchModel)
+        {
+            var query = _context.Patients.Include(x => x.PatientFiles).ThenInclude(x => x.Referrals).Where(x => x.IsDeleted == false).Select(x => new PatientViewModel
+            {
+                FirstName = x.FirstName,
+                LastName = x.LastName,
+                NationalCode = x.NationalCode,
+                Mobile = x.Mobile,
+                WhatsappNumber = x.WhatsappNumber,
+                HomeNumber = x.HomeNumber,
+                BirthDate = x.BirthDate,
+                Job = x.Job,
+                MaritalStatus = x.MaritalStatus,
+                Description = x.Description,
+                Education = x.Education,
+                Gender = x.Gender,
+                Reagent = x.Reagent,
+                Id = x.Id,
+                Address = x.Address,
+                PatientFiles = x.PatientFiles.Select(x => new PatientFileViewModel
+                {
+                    Id = x.Id,
+                    PatientId = x.PatientId,
+                    PatientName = x.Patient.FirstName + " " + x.Patient.LastName,
+                    FileCode = x.FileCode,
+                    DocumentId = x.DocumentId,
+                    DoctorId = x.DoctorId,
+                    DoctorName = x.Doctor.FirstName + " " + x.Doctor.LastName,
+                    DocumentName = x.Document.Name,
+                    CreationDateGr = x.CreationDate,
+                    CreationDate = x.CreationDate.ToFarsi(),
+                    Referrals = x.Referrals.Select(x => new ReferralViewModel
+                    {
+                        Id= x.Id,
+                        ReferralDate = x.ReferralDate,
+                        ReferralDescription = x.ReferralDescription,
+                        ReferralReason = x.ReferralReason,
+                    }).ToList(),
+                }).ToList(),
+            });
 
+            if (searchModel.DocumentId > 0)
+                query = query.Where(x => x.PatientFiles.Any(x => x.DocumentId == searchModel.DocumentId));
+            
+            //if (searchModel.FromReferral > 0)
+            //    query = query.Where(x => x.PatientFiles.Any(x => x.Referrals.Count >= searchModel.FromReferral));
+
+            //if (searchModel.ToReferral > 0)
+            //    query = query.Where(x => x.PatientFiles.Any(x => x.Referrals.Count <= searchModel.ToReferral));
+
+            if (!string.IsNullOrWhiteSpace(searchModel.FromDate))
+            {
+                var fromDate = DateTime.Now;
+                query = query.Where(x => x.PatientFiles.Any(x => x.CreationDateGr > fromDate));
+            }
+
+            if (!string.IsNullOrWhiteSpace(searchModel.ToDate))
+            {
+                var toDate = DateTime.Now;
+                query = query.Where(x => x.PatientFiles.Any(x => x.CreationDateGr < toDate));
+            }
+
+            return query.ToList();
+
+        }
     }
 }

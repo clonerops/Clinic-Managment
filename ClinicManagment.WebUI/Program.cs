@@ -1,5 +1,6 @@
 using _0_Framework.Application;
 using _0_Framework.Domain;
+using AccountManagment.Application.contract.Account;
 using AccountManagment.Infrastructure.Configuration;
 using ClinicManagment.Infrastructure.Configuration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -65,7 +66,7 @@ builder.Services.AddSwaggerGen(c =>
     }
   });
 });
-var operation = new OperationResult();
+var operation = new OperationResult<AccountViewModel>();
 
 builder.Services.Configure<JwtOption>(builder.Configuration.GetSection("Jwt"));
 builder.Services.AddAuthentication(options =>

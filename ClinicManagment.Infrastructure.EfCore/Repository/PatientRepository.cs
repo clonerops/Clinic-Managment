@@ -44,6 +44,7 @@ namespace ClinicManagment.Infrastructure.EfCore.Repository
         {
             return _context.Patients.Where(x => x.IsDeleted == false).Select(x => new PatientViewModel
             {
+                Code = x.Code,
                 FirstName = x.FirstName,
                 LastName = x.LastName,
                 NationalCode = x.NationalCode,
@@ -66,6 +67,7 @@ namespace ClinicManagment.Infrastructure.EfCore.Repository
         {
             var query = _context.Patients.Where(x => x.IsDeleted == false).Select(x => new PatientViewModel
             {
+                Code = x.Code,
                 FirstName = x.FirstName,
                 LastName = x.LastName,
                 NationalCode = x.NationalCode,
@@ -106,6 +108,7 @@ namespace ClinicManagment.Infrastructure.EfCore.Repository
         {
             var query = _context.Patients.Include(x => x.PatientFiles).Where(x => x.IsDeleted == false).Select(x => new PatientViewModel
             {
+                Code = x.Code,
                 FirstName = x.FirstName,
                 LastName = x.LastName,
                 NationalCode = x.NationalCode,
@@ -159,6 +162,7 @@ namespace ClinicManagment.Infrastructure.EfCore.Repository
         {
             var query = _context.Patients.Include(x => x.PatientFiles).ThenInclude(x => x.Referrals).Where(x => x.IsDeleted == false).Select(x => new PatientViewModel
             {
+                Code = x.Code,
                 FirstName = x.FirstName,
                 LastName = x.LastName,
                 NationalCode = x.NationalCode,

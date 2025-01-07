@@ -6,6 +6,7 @@ namespace ClinicManagment.Domain.PatientAgg
 {
     public class Patient: EntityBase<int>
     {
+        public int Code { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string NationalCode { get; set; }
@@ -27,12 +28,13 @@ namespace ClinicManagment.Domain.PatientAgg
             PatientFiles: new List<PatientFile>();
         }
 
-        public Patient(string firstName, string lastName, string nationalCode,
+        public Patient(int code, string firstName, string lastName, string nationalCode,
             string mobile, string whatsappNumber, string homeNumber,
             string birthDate, string job, string education,
             string reagent, bool gender, bool maritalStatus,
             string address, string description)
         {
+            Code = code;
             FirstName = firstName;
             LastName = lastName;
             NationalCode = nationalCode;

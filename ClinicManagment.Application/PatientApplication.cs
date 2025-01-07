@@ -7,6 +7,7 @@ namespace ClinicManagment.Application
 {
     public class PatientApplication : IPatientApplication
     {
+        private static int _lastPatientCode = 1000; // مقدار اولیه شمارنده
         private readonly IPatientRepository _patientRepository;
 
         public PatientApplication(IPatientRepository patientRepository)
@@ -21,7 +22,9 @@ namespace ClinicManagment.Application
             if (_patientRepository.Exist(x => x.NationalCode == command.NationalCode))
                 return operation.Failed("اطلاعات کاربر قبلا در سامانه ذخیره شده است");
 
-            var patient = new Patient(command.FirstName, command.LastName, command.NationalCode,
+            int newPatientCode = Interlocked.Increment(ref _lastPatientCode);
+
+            var patient = new Patient(newPatientCode, command.FirstName, command.LastName, command.NationalCode,
                 command.Mobile, command.WhatsappNumber, command.HomeNumber, command.BirthDate,
                 command.Job, command.Education, command.Reagent, command.Gender, command.MaritalStatus,
                 command.Address, command.Description);
@@ -34,6 +37,7 @@ namespace ClinicManagment.Application
                 Id = patient.Id,
                 FirstName = patient.FirstName,
                 LastName = patient.LastName,
+                Code = patient.Code,
             };
 
             return operation.Succedded(patientViewModel);

@@ -2,6 +2,7 @@
 {
     public class CreatePatient
     {
+        public int Code { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string NationalCode { get; set; }

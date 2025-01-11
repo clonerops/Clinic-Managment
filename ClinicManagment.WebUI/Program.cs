@@ -36,9 +36,9 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo
     {
-        Title = "LampShade",
+        Title = "Clinic Managment",
         Version = "v1",
-        Description = "An Api to perform LampShade by CLONER",
+        Description = "An Api to perform Clinic Managment by CLONER",
         Contact = new OpenApiContact
         {
             Name = "CLONER",
@@ -123,12 +123,20 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Clinic Managment v1");
+    });
 }
 
 app.UseHttpsRedirection();
 app.UseCors("AllowSpecificOrigin"); 
 app.UseAuthorization();
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Clinic Managment v1");
+});
 
 app.MapControllers();
 

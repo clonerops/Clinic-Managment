@@ -72,5 +72,12 @@ namespace ManagmentClinic.WebApi.Controllers
             return new JsonResult(patient);
 
         }
+        [HttpGet("PatientListExcel")]
+        public JsonResult PatientListExcel([FromQuery] PatientExcelListSearchModel searchModel)
+        {
+            var patient = _patientApplication.PatientExcelList(searchModel);
+            return new JsonResult(patient);
+
+        }
     }
 }

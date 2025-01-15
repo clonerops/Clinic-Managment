@@ -10,6 +10,7 @@ namespace ClinicManagment.Domain.PatientAgg
         List<PatientViewModel> Search(PatientSearchModel searchModel);
         List<PatientViewModel> PatientReport(PatientReportSearchModel searchModel);
         List<PatientViewModel> PatientReportBasedOfReferralCount(PatientReportBasedOfReferralCountSearchModel searchModel);
+        List<PatientViewModel> PtientExcelList(PatientSearchModel searchModel);
         
         
     }

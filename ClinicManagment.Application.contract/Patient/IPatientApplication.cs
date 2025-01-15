@@ -14,5 +14,7 @@ namespace ClinicManagment.Application.contract.Patient
         List<PatientViewModel> Search(PatientSearchModel searchModel);
         List<PatientViewModel> PatientReport(PatientReportSearchModel searchModel);
         List<PatientViewModel> PatientReportBasedOfReferralCount(PatientReportBasedOfReferralCountSearchModel searchModel);
+        OperationResult<byte[]> PatientExcelList(PatientExcelListSearchModel searchModel);
+    
     }
 }

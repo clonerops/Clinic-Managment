@@ -148,5 +148,44 @@ namespace ClinicManagment.Application
 
             return operation.Succedded(excelFile);
         }
+
+        public OperationResult<byte[]> PatientReportExcel(PatientReportSearchModel searchModel)
+        {
+            var operation = new OperationResult<byte[]>();
+            var columns = new List<string> { "FirstName", "LastName", "NationalCode", "Mobile" };
+
+            var patients = _patientRepository.PatientReport(searchModel);
+
+            var columnHeaders = new Dictionary<string, string> {
+                { "FirstName", "نام" },
+                { "LastName", "نام خانوادگی" },
+                { "NationalCode", "کد ملی" },
+                { "Mobile", "موبایل" },
+            };
+            var excelFile = ExcelHelper.GenrateExcel(patients, "Patients", columns, columnHeaders);
+
+            return operation.Succedded(excelFile);
+
+        }
+
+        public OperationResult<byte[]> PatientReportBasedOfReferralCountExcel(PatientReportBasedOfReferralCountSearchModel searchModel)
+        {
+            var operation = new OperationResult<byte[]>();
+            var patients = _patientRepository.PatientReportBasedOfReferralCount(searchModel);
+
+            var columns = new List<string> { "FirstName", "LastName", "NationalCode", "Mobile" };
+
+            var columnHeaders = new Dictionary<string, string> {
+                { "FirstName", "نام" },
+                { "LastName", "نام خانوادگی" },
+                { "NationalCode", "کد ملی" },
+                { "Mobile", "موبایل" },
+            };
+
+            var excelFile = ExcelHelper.GenrateExcel(patients, "Patients", columns, columnHeaders);
+
+            return operation.Succedded(excelFile);
+
+        }
     }
 }

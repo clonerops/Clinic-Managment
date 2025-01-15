@@ -225,58 +225,5 @@ namespace ClinicManagment.Infrastructure.EfCore.Repository
 
         }
 
-        public List<PatientViewModel> PtientExcelList(PatientSearchModel searchModel)
-        {
-            var query = _context.Patients.Include(x => x.PatientFiles).Where(x => x.IsDeleted == false).Select(x => new PatientViewModel
-            {
-                Code = x.Code,
-                FirstName = x.FirstName,
-                LastName = x.LastName,
-                NationalCode = x.NationalCode,
-                Mobile = x.Mobile,
-                WhatsappNumber = x.WhatsappNumber,
-                HomeNumber = x.HomeNumber,
-                BirthDate = x.BirthDate,
-                Job = x.Job,
-                MaritalStatus = x.MaritalStatus,
-                Description = x.Description,
-                Education = x.Education,
-                Gender = x.Gender,
-                Reagent = x.Reagent,
-                Id = x.Id,
-                Address = x.Address,
-                PatientFiles = x.PatientFiles.Select(x => new PatientFileViewModel
-                {
-                    Id = x.Id,
-                    PatientId = x.PatientId,
-                    PatientName = x.Patient.FirstName + " " + x.Patient.LastName,
-                    FileCode = x.FileCode,
-                    DocumentId = x.DocumentId,
-                    DoctorId = x.DoctorId,
-                    DoctorName = x.Doctor.FirstName + " " + x.Doctor.LastName,
-                    DocumentName = x.Document.Name,
-                    CreationDateGr = x.CreationDate,
-                    CreationDate = x.CreationDate.ToFarsi()
-                }).ToList(),
-            });
-
-            if (searchModel.Id > 0)
-                query = query.Where(x => x.Id == searchModel.Id);
-
-            if (!string.IsNullOrWhiteSpace(searchModel.Mobile))
-                query = query.Where(x => x.Mobile == searchModel.Mobile);
-
-            if (!string.IsNullOrWhiteSpace(searchModel.FirstName))
-                query = query.Where(x => x.FirstName == searchModel.FirstName);
-
-            if (!string.IsNullOrWhiteSpace(searchModel.LastName))
-                query = query.Where(x => x.LastName == searchModel.LastName);
-
-            if (!string.IsNullOrWhiteSpace(searchModel.NationalCode))
-                query = query.Where(x => x.NationalCode == searchModel.NationalCode);
-
-            return query.ToList();
-
-        }
     }
 }

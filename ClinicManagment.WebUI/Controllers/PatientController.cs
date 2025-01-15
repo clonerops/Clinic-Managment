@@ -73,9 +73,23 @@ namespace ManagmentClinic.WebApi.Controllers
 
         }
         [HttpGet("PatientListExcel")]
-        public JsonResult PatientListExcel([FromQuery] PatientExcelListSearchModel searchModel)
+        public JsonResult PatientListExcel([FromQuery] PatientSearchModel searchModel)
         {
             var patient = _patientApplication.PatientExcelList(searchModel);
+            return new JsonResult(patient);
+
+        }
+        [HttpGet("PatientReportBasedOfFileExcel")]
+        public JsonResult PatientReportExcel([FromQuery] PatientReportSearchModel searchModel)
+        {
+            var patient = _patientApplication.PatientReportExcel(searchModel);
+            return new JsonResult(patient);
+
+        }
+        [HttpGet("PatientReportBasedOfReferralCountExcel")]
+        public JsonResult PatientReportBasedOfReferralCountExcel([FromQuery] PatientReportBasedOfReferralCountSearchModel searchModel)
+        {
+            var patient = _patientApplication.PatientReportBasedOfReferralCountExcel(searchModel);
             return new JsonResult(patient);
 
         }

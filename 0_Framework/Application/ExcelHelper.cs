@@ -42,7 +42,6 @@ namespace _0_Framework.Application
                     range.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightBlue);
                     range.Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
                     range.Style.Border.BorderAround(OfficeOpenXml.Style.ExcelBorderStyle.Thin);
-                    range.Style.Font.Name = "B Titr";
                 }
 
                 worksheet.Cells.AutoFitColumns();

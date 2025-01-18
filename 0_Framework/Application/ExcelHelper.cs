@@ -6,10 +6,10 @@ namespace _0_Framework.Application
     {
         public static byte[] GenrateExcel<T>(List<T> data, string sheetName, List<string> columns, Dictionary<string, string> columnHeaders)
         {
-            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
             byte[] excelFile = null;
 
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             using (ExcelPackage package = new ExcelPackage())
             {
                 var worksheet = package.Workbook.Worksheets.Add(sheetName);

@@ -36,7 +36,6 @@ namespace ClinicManagment.Infrastructure.Configuration
             services.AddTransient<IReferralApplication, ReferralApplication>();
             services.AddTransient<IReferralRepository, ReferralRepository>();
 
-
             services.AddDbContext<CMContext>(x => x.UseSqlServer(connectionString));
 
         }

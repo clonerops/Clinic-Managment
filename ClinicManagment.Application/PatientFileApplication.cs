@@ -40,6 +40,9 @@ namespace ClinicManagment.Application
             var patientFileViewModel = new PatientFileViewModel
             {
                 Id = patientFile.Id,
+                PatientId = patientFile.PatientId,
+                DocumentId = command.DocumentId,
+                DoctorId = command.DoctorId,
             };
 
             return operation.Succedded(patientFileViewModel);

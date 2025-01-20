@@ -145,53 +145,28 @@ namespace ClinicManagment.Application
                 { "Mobile", "موبایل" }, 
             };
 
-            var excelFile = ExcelClosedXmlHelper.GenrateExcelClosedXml<PatientViewModel>(patients, "Patients", columns, columnHeaders);
+            var excelFile = ExcelHelper.GenrateExcel(patients, "Patients", columns, columnHeaders);
 
             return operation.Succedded(excelFile);
         }
 
         public OperationResult<byte[]> PatientReportExcel(PatientReportSearchModel searchModel)
         {
-            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-            using (ExcelPackage package = new ExcelPackage())
-            {
-                var operation = new OperationResult<byte[]>();
-                var columns = new List<string> { "FirstName", "LastName", "NationalCode", "Mobile" };
+            var operation = new OperationResult<byte[]>();
+            var patients = _patientRepository.PatientReport(searchModel);
 
-                var patients = _patientRepository.PatientReport(searchModel);
+            var columns = new List<string> { "FirstName", "LastName", "NationalCode", "Mobile" };
 
-                var worksheet = package.Workbook.Worksheets.Add("Patients");
+            var columnHeaders = new Dictionary<string, string> {
+                { "FirstName", "نام" },
+                { "LastName", "نام خانوادگی" },
+                { "NationalCode", "کد ملی" },
+                { "Mobile", "موبایل" },
+            };
 
+            var excelFile = ExcelHelper.GenrateExcel(patients, "PatientsReport", columns, columnHeaders);
 
-                var columnHeaders = new Dictionary<string, string> {
-                    { "FirstName", "نام" },
-                    { "LastName", "نام خانوادگی" },
-                    { "NationalCode", "کد ملی" },
-                    { "Mobile", "موبایل" },
-                };
-
-                for (var i = 0; i < columns.Count; i++) 
-                { 
-                    worksheet.Cells[1, i + 1].Value = columnHeaders[columns[i]]; 
-                }
-
-                for (int i = 0; i < patients.Count; i++) 
-                { 
-                    worksheet.Cells[i + 2, 1].Value = patients[i].FirstName; 
-                    worksheet.Cells[i + 2, 2].Value = patients[i].LastName; 
-                    worksheet.Cells[i + 2, 3].Value = patients[i].NationalCode; 
-                    worksheet.Cells[i + 2, 4].Value = patients[i].Mobile; 
-                }
-                worksheet.Cells.AutoFitColumns(); 
-                byte[] excelFile = package.GetAsByteArray();
-
-                //    var excelFile = ExcelClosedXmlHelper.GenrateExcelClosedXml<PatientViewModel>(patients, "Patients", columns, columnHeaders);
-
-                return operation.Succedded(excelFile);
-
-            }
-
-
+            return operation.Succedded(excelFile);
         }
 
         public OperationResult<byte[]> PatientReportBasedOfReferralCountExcel(PatientReportBasedOfReferralCountSearchModel searchModel)
@@ -208,7 +183,7 @@ namespace ClinicManagment.Application
                 { "Mobile", "موبایل" },
             };
 
-            var excelFile = ExcelClosedXmlHelper.GenrateExcelClosedXml<PatientViewModel>(patients, "Patients", columns, columnHeaders);
+            var excelFile = ExcelHelper.GenrateExcel(patients, "PatientsReferrals", columns, columnHeaders);
 
             return operation.Succedded(excelFile);
 

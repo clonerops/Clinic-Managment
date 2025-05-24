@@ -15,12 +15,12 @@ namespace ClinicManagment.Infrastructure.EfCore.Repository
 
         public DocumentViewModel GetBy(int id)
         {
-            return _context.Documents.Where(x => x.IsDeleted == false).Select(x => new DocumentViewModel
+            return _context.Documents.Where(x => x.IsDeleted == false && x.Id == id).Select(x => new DocumentViewModel
             {
                 Id = id,
                 Name = x.Name,
                 Description = x.Description
-            }).FirstOrDefault(x => x.Id == id);
+            }).FirstOrDefault();
         }
 
         public List<DocumentViewModel> List()

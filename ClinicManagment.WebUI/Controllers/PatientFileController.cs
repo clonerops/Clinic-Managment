@@ -42,7 +42,7 @@ namespace ClinicManagment.WebUI.Controllers
             return new JsonResult(PatientFIle);
         }
 
-        [HttpDelete]
+        [HttpDelete("{id:int}")]
         public JsonResult DeleteAccount(int patientId, int documentId,int doctorId)
         {
             var account = _patientFileApplication.Remove(patientId, documentId, doctorId);

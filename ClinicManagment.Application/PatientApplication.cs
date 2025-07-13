@@ -21,7 +21,7 @@ namespace ClinicManagment.Application
         {
             var operation = new OperationResult<PatientViewModel>();
 
-            if (_patientRepository.Exist(x => x.NationalCode == command.NationalCode))
+            if (_patientRepository.Exist(x => x.Mobile == command.Mobile))
                 return operation.Failed("اطلاعات کاربر قبلا در سامانه ذخیره شده است");
 
             int newPatientCode = Interlocked.Increment(ref _lastPatientCode);

@@ -17,8 +17,8 @@ namespace ClinicManagment.Application
         {
             var operation = new OperationResult<DoctorViewModel>();
 
-            if (_doctorRepository.Exist(x => x.NationalCode == command.NationalCode))
-                return operation.Failed("اطلاعات پزشک قبلا در سامانه ثبت شده است.");
+            //if (_doctorRepository.Exist(x => x.NationalCode == command.NationalCode))
+            //    return operation.Failed("اطلاعات پزشک قبلا در سامانه ثبت شده است.");
 
             var doctor =  new Doctor(command.FirstName, command.LastName, 
                 command.NationalCode, command.Mobile, command.Description);

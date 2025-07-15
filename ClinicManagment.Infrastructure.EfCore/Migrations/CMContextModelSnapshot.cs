@@ -94,6 +94,31 @@ namespace ClinicManagment.Infrastructure.EfCore.Migrations
                     b.ToTable("Documents");
                 });
 
+            modelBuilder.Entity("ClinicManagment.Domain.LogAgg.Log", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StackTrace")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Logs");
+                });
+
             modelBuilder.Entity("ClinicManagment.Domain.PatientAgg.Patient", b =>
                 {
                     b.Property<int>("Id")

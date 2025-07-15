@@ -2,6 +2,8 @@
 using _0_Framework.Application;
 using ClinicManagment.Application.contract.Patient;
 using ClinicManagment.Domain.PatientAgg;
+using DocumentFormat.OpenXml.Spreadsheet;
+using OfficeOpenXml;
 
 namespace ClinicManagment.Application
 {
@@ -127,6 +129,64 @@ namespace ClinicManagment.Application
         public List<PatientViewModel> PatientReportBasedOfReferralCount(PatientReportBasedOfReferralCountSearchModel searchModel)
         {
             return _patientRepository.PatientReportBasedOfReferralCount(searchModel);            
+        }
+
+        public OperationResult<byte[]> PatientExcelList(PatientSearchModel searchModel)
+        {
+            var operation = new OperationResult<byte[]>();
+            var patients = _patientRepository.Search(searchModel);
+
+            var columns = new List<string> { "FirstName", "LastName", "NationalCode", "Mobile" };
+
+            var columnHeaders = new Dictionary<string, string> { 
+                { "FirstName", "نام" }, 
+                { "LastName", "نام خانوادگی" }, 
+                { "NationalCode", "کد ملی" }, 
+                { "Mobile", "موبایل" }, 
+            };
+
+            var excelFile = ExcelHelper.GenrateExcel(patients, "Patients", columns, columnHeaders);
+
+            return operation.Succedded(excelFile);
+        }
+
+        public OperationResult<byte[]> PatientReportExcel(PatientReportSearchModel searchModel)
+        {
+            var operation = new OperationResult<byte[]>();
+            var patients = _patientRepository.PatientReport(searchModel);
+
+            var columns = new List<string> { "FirstName", "LastName", "NationalCode", "Mobile" };
+
+            var columnHeaders = new Dictionary<string, string> {
+                { "FirstName", "نام" },
+                { "LastName", "نام خانوادگی" },
+                { "NationalCode", "کد ملی" },
+                { "Mobile", "موبایل" },
+            };
+
+            var excelFile = ExcelHelper.GenrateExcel(patients, "PatientsReport", columns, columnHeaders);
+
+            return operation.Succedded(excelFile);
+        }
+
+        public OperationResult<byte[]> PatientReportBasedOfReferralCountExcel(PatientReportBasedOfReferralCountSearchModel searchModel)
+        {
+            var operation = new OperationResult<byte[]>();
+            var patients = _patientRepository.PatientReportBasedOfReferralCount(searchModel);
+
+            var columns = new List<string> { "FirstName", "LastName", "NationalCode", "Mobile" };
+
+            var columnHeaders = new Dictionary<string, string> {
+                { "FirstName", "نام" },
+                { "LastName", "نام خانوادگی" },
+                { "NationalCode", "کد ملی" },
+                { "Mobile", "موبایل" },
+            };
+
+            var excelFile = ExcelHelper.GenrateExcel(patients, "PatientsReferrals", columns, columnHeaders);
+
+            return operation.Succedded(excelFile);
+
         }
     }
 }

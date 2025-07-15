@@ -56,7 +56,7 @@ namespace ClinicManagment.Infrastructure.EfCore.Repository
                     DoctorId = x.Doctor.Id,
                     DoctorName = String.Concat(x.Doctor.FirstName + " " + x.Doctor.LastName),
                     FileCode = x.FileCode,
-                }).ToList();
+                }).OrderByDescending(x => x.Id).ToList();
         }
 
         public List<PatientFile> ListPatientFile()

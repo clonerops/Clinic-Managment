@@ -224,5 +224,6 @@ namespace ClinicManagment.Infrastructure.EfCore.Repository
             return query.ToList();
 
         }
+
     }
 }

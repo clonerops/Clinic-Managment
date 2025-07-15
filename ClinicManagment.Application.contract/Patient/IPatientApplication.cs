@@ -13,6 +13,10 @@ namespace ClinicManagment.Application.contract.Patient
         List<PatientViewModel> Lists();
         List<PatientViewModel> Search(PatientSearchModel searchModel);
         List<PatientViewModel> PatientReport(PatientReportSearchModel searchModel);
+        OperationResult<byte[]> PatientReportExcel(PatientReportSearchModel searchModel);
         List<PatientViewModel> PatientReportBasedOfReferralCount(PatientReportBasedOfReferralCountSearchModel searchModel);
+        OperationResult<byte[]> PatientReportBasedOfReferralCountExcel(PatientReportBasedOfReferralCountSearchModel searchModel);
+        OperationResult<byte[]> PatientExcelList(PatientSearchModel searchModel);
+    
     }
 }

@@ -89,16 +89,16 @@ namespace ClinicManagment.Infrastructure.EfCore.Repository
                 query = query.Where(x => x.Id == searchModel.Id);
 
             if(!string.IsNullOrWhiteSpace(searchModel.Mobile))
-                query = query.Where(x => x.Mobile == searchModel.Mobile);
+                query = query.Where(x => x.Mobile.Contains(searchModel.Mobile));
 
             if (!string.IsNullOrWhiteSpace(searchModel.FirstName))
-                query = query.Where(x => x.FirstName == searchModel.FirstName);
+                query = query.Where(x => x.FirstName.Contains(searchModel.FirstName));
 
             if (!string.IsNullOrWhiteSpace(searchModel.LastName))
-                query = query.Where(x => x.LastName == searchModel.LastName);
+                query = query.Where(x => x.LastName.Contains(searchModel.LastName));
 
             if (!string.IsNullOrWhiteSpace(searchModel.NationalCode))
-                query = query.Where(x => x.NationalCode == searchModel.NationalCode);
+                query = query.Where(x => x.NationalCode.Contains(searchModel.NationalCode));
 
             return query.ToList();
 

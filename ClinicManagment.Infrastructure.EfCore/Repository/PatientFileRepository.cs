@@ -1,5 +1,6 @@
 ﻿using _0_Framework.Infrastructure;
 using ClinicManagment.Application.contract.PatientFile;
+using ClinicManagment.Domain.PatientAgg;
 using ClinicManagment.Domain.PatientFileAgg;
 using Microsoft.EntityFrameworkCore;
 using System.IO;
@@ -80,6 +81,9 @@ namespace ClinicManagment.Infrastructure.EfCore.Repository
                     Id = x.Id,
                     PatientId = x.Patient.Id,
                     PatientName = String.Concat(x.Patient.FirstName + " " + x.Patient.LastName),
+                    FirstName = x.Patient.FirstName,
+                    LastName = x.Patient.LastName,
+                    Mobile = x.Patient.Mobile,
                     DocumentId = x.Document.Id,
                     DocumentName = x.Document.Name,
                     DoctorId = x.Doctor.Id,
@@ -89,6 +93,16 @@ namespace ClinicManagment.Infrastructure.EfCore.Repository
 
             if (searchModel.FileCode > 0)
                 query.Where(x => x.FileCode == searchModel.FileCode);
+
+            if (!string.IsNullOrWhiteSpace(searchModel.Mobile))
+                query = query.Where(x => x.Mobile.Contains(searchModel.Mobile));
+
+            if (!string.IsNullOrWhiteSpace(searchModel.FirstName))
+                query = query.Where(x => x.FirstName.Contains(searchModel.FirstName));
+
+            if (!string.IsNullOrWhiteSpace(searchModel.LastName))
+                query = query.Where(x => x.LastName.Contains(searchModel.LastName));
+
 
             return query.ToList();
         }

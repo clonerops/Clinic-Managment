@@ -8,6 +8,9 @@ namespace ClinicManagment.Application.contract.PatientFile
         public long Id { get; set; }
         public long FileCode { get; set; }
         public int PatientId { get; set; }
+        public string Mobile { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string PatientName { get; set; }
         public int DocumentId { get; set; }
         public string DocumentName { get; set; }

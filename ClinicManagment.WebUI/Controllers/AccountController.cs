@@ -1,5 +1,6 @@
 ﻿using AccountManagment.Application;
 using AccountManagment.Application.contract.Account;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ClinicManagment.WebUI.Controllers
@@ -15,6 +16,7 @@ namespace ClinicManagment.WebUI.Controllers
             _AccountApplication = AccountApplication;
         }
 
+        [Authorize]
         [HttpPost]
         public JsonResult CreateAccount(CreateAccount command)
         {
@@ -22,6 +24,7 @@ namespace ClinicManagment.WebUI.Controllers
             return new JsonResult(Account);
         }
 
+        [Authorize]
         [HttpPut("{id:int}")]
         public JsonResult EditAccount([FromBody] EditAccount command)
         {
@@ -29,6 +32,7 @@ namespace ClinicManagment.WebUI.Controllers
             return new JsonResult(Account);
         }
 
+        [Authorize]
         [HttpGet]
         public JsonResult GetAllAccounts()
         {
@@ -36,6 +40,7 @@ namespace ClinicManagment.WebUI.Controllers
             return new JsonResult(Account);
         }
 
+        [Authorize]
         [HttpDelete("{id:Guid}")]
         public JsonResult DeleteAccount([FromRoute] Guid id)
         {
@@ -44,6 +49,7 @@ namespace ClinicManagment.WebUI.Controllers
             return new JsonResult(account);
         }
 
+        [Authorize]
         [HttpPut("Restore/{id:Guid}")]
         public JsonResult RestoreAccount([FromRoute] Guid id)
         {

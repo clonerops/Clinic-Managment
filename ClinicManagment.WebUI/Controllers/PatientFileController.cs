@@ -1,4 +1,5 @@
-﻿using ClinicManagment.Application.contract.PatientFile;
+﻿using ClinicManagment.Application.contract.Patient;
+using ClinicManagment.Application.contract.PatientFile;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ClinicManagment.WebUI.Controllers
@@ -29,9 +30,9 @@ namespace ClinicManagment.WebUI.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetAllPatientFIles()
+        public JsonResult GetAllPatientFIles([FromQuery] PatientFileSearchModel searchModel)
         {
-            var PatientFIle = _patientFileApplication.List();
+            var PatientFIle = _patientFileApplication.Search(searchModel);
             return new JsonResult(PatientFIle);
         }
 
@@ -42,7 +43,7 @@ namespace ClinicManagment.WebUI.Controllers
             return new JsonResult(PatientFIle);
         }
 
-        [HttpDelete]
+        [HttpDelete("{id:int}")]
         public JsonResult DeleteAccount(int patientId, int documentId,int doctorId)
         {
             var account = _patientFileApplication.Remove(patientId, documentId, doctorId);
